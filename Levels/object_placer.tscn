@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://der7yq6e6y5i5"]
+
+[ext_resource type="Script" uid="uid://co4nahgr65fo3" path="res://Levels/object_placer.gd" id="1_hfb3q"]
+
+[node name="ObjectPlacer" type="Node3D"]
+script = ExtResource("1_hfb3q")
+
+[node name="PlacedObjects" type="Node3D" parent="."]
+
+[node name="PreviewObjectGhost" type="MeshInstance3D" parent="."]

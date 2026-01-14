@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://but7xab6ip3jo"]
+
+[ext_resource type="Script" uid="uid://d0p07kos4bjjx" path="res://Player/mode_manager.gd" id="1_y2ud0"]
+
+[node name="ModeManager" type="Node3D"]
+script = ExtResource("1_y2ud0")

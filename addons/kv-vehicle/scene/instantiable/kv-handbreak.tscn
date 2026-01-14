@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1rygb1612ojy"]
+
+[ext_resource type="Script" uid="uid://ihvpp1mnycc" path="res://addons/kv-vehicle/nodes/kv-handbreak.gd" id="1_dwqct"]
+
+[node name="handbreak" type="Node"]
+script = ExtResource("1_dwqct")

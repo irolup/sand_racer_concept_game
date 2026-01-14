@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc5dm6omi2xne"]
+
+[ext_resource type="Script" uid="uid://fq1qo7os5m4d" path="res://Menus/editor_loader.gd" id="1_keyet"]
+
+[node name="EditorLoader" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_keyet")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NewTrackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "New Track"
+
+[node name="LoadTrackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Load Track"
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="NewTrackPopup" type="Popup" parent="."]
+size = Vector2i(175, 100)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NewTrackPopup"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="NewTrackPopup/VBoxContainer"]
+layout_mode = 2
+text = "Enter new track name:"
+
+[node name="LineEdit" type="LineEdit" parent="NewTrackPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NewTrackPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="ConfirmButton" type="Button" parent="NewTrackPopup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Create"
+
+[node name="CancelButton" type="Button" parent="NewTrackPopup/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Cancel"

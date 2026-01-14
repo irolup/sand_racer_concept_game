@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://di8yt3gcgfhdu"]
+
+[ext_resource type="Script" uid="uid://nvequ41l8lb8" path="res://addons/kv-vehicle/nodes/kv-brakes.gd" id="1_e0rqp"]
+
+[node name="k-breaks" type="Node"]
+script = ExtResource("1_e0rqp")

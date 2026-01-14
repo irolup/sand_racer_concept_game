@@ -1,0 +1,32 @@
+# Godot-specific ignores
+.godot/
+*.tmp
+*.godot/
+
+# Imported assets (can be regenerated)
+*.import
+
+# OS-specific ignores
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build outputs
+export/
+builds/
+*.exe
+*.pck
+*.zip
+*.app
+
+# Editor-specific
+.import/
+.mono/
+
+# Personal/development files
+test1
+

@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://bj233wg0k5djo"]
+
+[ext_resource type="Script" uid="uid://dax4tchj1ut7n" path="res://addons/kv-vehicle/scene/instantiable/kv-wheel.gd" id="1_2oa8d"]
+[ext_resource type="Script" uid="uid://4bu8g5xpvlnv" path="res://addons/kv-vehicle/scene/instantiable/wheelSteerPivot.gd" id="2_1lmvs"]
+[ext_resource type="Script" uid="uid://c86jlkb00vf83" path="res://addons/kv-vehicle/SuspensionGeometry.gd" id="2_b75h0"]
+[ext_resource type="Script" uid="uid://d13304qiisy4c" path="res://addons/kv-vehicle/nodes/kv-debugVectors.gd" id="3_wmpnu"]
+[ext_resource type="Script" uid="uid://b7omqag540vid" path="res://addons/kv-vehicle/scene/instantiable/Label3DDebug.gd" id="4_snyr5"]
+
+[sub_resource type="Resource" id="Resource_tv730"]
+script = ExtResource("2_b75h0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_327r1"]
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_ldieg"]
+resource_local_to_scene = true
+
+[node name="kwheel" type="Node3D"]
+script = ExtResource("1_2oa8d")
+overCompressionBegin = null
+dampOverCompressionRebound = null
+suspensionGeometry = SubResource("Resource_tv730")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+enabled = false
+
+[node name="shapecastPivot" type="Node3D" parent="."]
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="shapecastPivot"]
+transform = Transform3D(-2.79397e-08, -1, -1.49012e-08, 1, -2.04891e-08, 0, 7.45058e-09, 0, 1, 0, 0, 0)
+enabled = false
+target_position = Vector3(-1, 0, 0)
+
+[node name="wheelSteerPivot" type="Node3D" parent="."]
+script = ExtResource("2_1lmvs")
+
+[node name="wheelRollPivot" type="Node3D" parent="wheelSteerPivot"]
+
+[node name="wheelMesh" type="MeshInstance3D" parent="wheelSteerPivot/wheelRollPivot"]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, 0)
+
+[node name="contactTransform" type="MeshInstance3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_327r1")
+cast_shadow = 0
+mesh = SubResource("ImmediateMesh_ldieg")
+script = ExtResource("3_wmpnu")
+
+[node name="Label3DDebug" type="Label3D" parent="."]
+sorting_offset = 1.0
+pixel_size = 0.002
+billboard = 1
+double_sided = false
+no_depth_test = true
+fixed_size = true
+script = ExtResource("4_snyr5")
+
+[node name="RollingAudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+volume_db = -80.0
+
+[node name="SlippingAudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+volume_db = -80.0
+
+[node name="Particles" type="Node3D" parent="."]

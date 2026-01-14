@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://nqf277e8w6vf"]
+
+[ext_resource type="Script" uid="uid://pw87c60bcjpr" path="res://addons/kv-vehicle/nodes/kv-enginePitcherSFX.gd" id="1_inrsg"]
+
+[node name="enginePitcherSFX" type="AudioStreamPlayer3D"]
+script = ExtResource("1_inrsg")

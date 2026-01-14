@@ -1,0 +1,465 @@
+[gd_scene load_steps=53 format=3 uid="uid://uhqh4aojmjyc"]
+
+[ext_resource type="Script" uid="uid://cehgtj58hj2l1" path="res://addons/kv-vehicle/scene/instantiable/kv-vehicle.gd" id="1_x0rmv"]
+[ext_resource type="Script" uid="uid://d13304qiisy4c" path="res://addons/kv-vehicle/nodes/kv-debugVectors.gd" id="2_p54xk"]
+[ext_resource type="Script" uid="uid://b7omqag540vid" path="res://addons/kv-vehicle/scene/instantiable/Label3DDebug.gd" id="3_nmnxy"]
+[ext_resource type="ArrayMesh" uid="uid://wvylss4q4uag" path="res://Vehicle/meshes/hatchback.obj" id="4_hdlfg"]
+[ext_resource type="PackedScene" uid="uid://bj233wg0k5djo" path="res://addons/kv-vehicle/scene/instantiable/kv-wheel.tscn" id="5_q6661"]
+[ext_resource type="Script" uid="uid://bu3p626eanu5x" path="res://addons/kv-vehicle/TireResponse.gd" id="6_3vg2q"]
+[ext_resource type="Script" uid="uid://tl4rxytr884t" path="res://addons/kv-vehicle/TireResponseKV.gd" id="7_pt5b7"]
+[ext_resource type="AudioStream" uid="uid://dufw33njpgg14" path="res://Vehicle/snd/fx/tire-slip-tarmac.wav" id="8_j45x7"]
+[ext_resource type="AudioStream" uid="uid://mxewvlnx5jqa" path="res://Vehicle/snd/fx/tire-slip-gravel.wav" id="9_2iy2e"]
+[ext_resource type="ArrayMesh" uid="uid://8xr5uetfjul2" path="res://Vehicle/meshes/buggie-wf.obj" id="10_75wet"]
+[ext_resource type="PackedScene" uid="uid://5i7leg7uek4d" path="res://addons/kv-vehicle/scene/instantiable/kv-inputHandler.tscn" id="11_yuh4p"]
+[ext_resource type="PackedScene" uid="uid://b2gbcjjc1sqdp" path="res://addons/kv-vehicle/scene/instantiable/kv-centerOfMass.tscn" id="12_h5y2x"]
+[ext_resource type="PackedScene" uid="uid://b1rygb1612ojy" path="res://addons/kv-vehicle/scene/instantiable/kv-handbreak.tscn" id="13_srm8v"]
+[ext_resource type="PackedScene" uid="uid://nqf277e8w6vf" path="res://addons/kv-vehicle/scene/instantiable/kv-enginePitcherSFX.tscn" id="14_ai8qv"]
+[ext_resource type="Script" uid="uid://crs33gum30yv2" path="res://Vehicle/follow_camera_monster_truck.gd" id="14_ucej6"]
+[ext_resource type="AudioStream" uid="uid://b1hhwjooh2ywx" path="res://Vehicle/snd/fx/engine-crawler/crawler4000.wav" id="15_ucej6"]
+[ext_resource type="PackedScene" uid="uid://b0hama08v0ayv" path="res://addons/kv-vehicle/scene/instantiable/kv-engine.tscn" id="16_nj4ux"]
+[ext_resource type="PackedScene" uid="uid://cmtcpbwh5t3lc" path="res://addons/kv-vehicle/scene/instantiable/kv-drivetrain.tscn" id="17_1lcff"]
+[ext_resource type="PackedScene" uid="uid://di8yt3gcgfhdu" path="res://addons/kv-vehicle/scene/instantiable/kv-breaks.tscn" id="18_82fu8"]
+[ext_resource type="PackedScene" uid="uid://dkitefvmd6uu0" path="res://addons/kv-vehicle/scene/instantiable/kv-swayBar.tscn" id="19_7vs20"]
+[ext_resource type="Script" uid="uid://cmmtfwqrk3wbs" path="res://Vehicle/big-foot-input.gd" id="20_sku65"]
+[ext_resource type="PackedScene" uid="uid://csbfypw6a2bh0" path="res://addons/kv-vehicle/scene/instantiable/kv-LSDifferential.tscn" id="21_ai8qv"]
+[ext_resource type="Script" uid="uid://cn83joebvrbef" path="res://addons/kv-vehicle/scene/instantiable/kv-CentralLSDifferential.gd" id="22_ucej6"]
+[ext_resource type="PackedScene" uid="uid://c12ekqv7i3v3j" path="res://addons/kv-vehicle/scene/instantiable/shiftAssist.tscn" id="23_nj4ux"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mgw6p"]
+friction = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g5pof"]
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_ixsks"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_25hjg"]
+albedo_color = Color(0.265742, 0.535934, 0.585299, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4eicv"]
+albedo_color = Color(0.459814, 0.553634, 0.793209, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wup1r"]
+points = PackedVector3Array(-1.064, 0.243, 1.171, 0.972, 0.071, 1.502, 1.038, -0.375, 1.603, 0.729, -0.313, -1.92, 0.548, 0.806, -1.46, -0.94, -0.251, -1.796, -1.064, -0.375, 1.604, -0.569, 0.859, 0.219, 1.038, 0.552, 0.552, -0.518, 0.808, -1.465, -0.183, 0.303, 1.759, 1.038, -0.189, -1.734, -1.064, 0.182, -1.487, 0.545, 0.859, 0.219, -1.002, 0.614, 0.553, 0.58, 0.126, 1.895, -0.603, 0.304, -1.834, 1.038, -0.375, -0.992, -0.816, -0.313, -1.858, -0.658, 0.186, 1.816, -0.311, -0.233, 1.907, 1.038, 0.181, -1.549, 0.72, 0.415, 1.461, 0.637, 0.422, -1.775, -1.064, -0.375, 0.676, -0.691, 0.415, 1.467, 0.548, 0.863, -0.564, -1.064, -0.313, -0.993, -0.55, 0.065, -1.914, 0.678, -0.33, 1.781, -0.571, 0.86, -0.506, -0.548, 0.126, 1.901)
+
+[sub_resource type="Curve" id="Curve_yuh4p"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.926531, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_h5y2x"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_srm8v"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_ai8qv"]
+script = ExtResource("7_pt5b7")
+loadEase = 1.0
+clampAfterCombining = true
+gripXCurve = SubResource("Curve_h5y2x")
+useBuildupEase = true
+buildupEase = 0.02
+slipAngleBegin = 12.0
+slipAngleEnd = 16.0
+gripZCurve = SubResource("Curve_srm8v")
+relativeZSpeedBegin = 3.0
+relativeZSpeedEnd = 4.0
+useSlipRatio = false
+feedbackCurve = SubResource("Curve_yuh4p")
+materialName = "tarmac"
+maxNormalLoadCoeficient = 8.0
+coeficientOfFriction = 1.0
+slippingStream = ExtResource("8_j45x7")
+slipAudioMinimumVelocity = 8.0
+slipAudioMinimumPitch = 0.8
+slipAudioMaximumVelocity = 100.0
+slipAudioMaximumPitch = 1.1
+audioVolumeEase = 0.5
+bumpHeight = 0.0
+bumpVisualBias = 0.0
+metadata/_custom_type_script = "uid://tl4rxytr884t"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ucej6"]
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nj4ux"]
+noise = SubResource("FastNoiseLite_ucej6")
+
+[sub_resource type="Curve" id="Curve_1lcff"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.94, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_82fu8"]
+_data = [Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_7vs20"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_sku65"]
+script = ExtResource("7_pt5b7")
+loadEase = 1.0
+clampAfterCombining = true
+gripXCurve = SubResource("Curve_82fu8")
+useBuildupEase = true
+buildupEase = 1.0
+slipAngleBegin = 12.0
+slipAngleEnd = 16.0
+gripZCurve = SubResource("Curve_7vs20")
+relativeZSpeedBegin = 2.0
+relativeZSpeedEnd = 3.0
+useSlipRatio = false
+feedbackCurve = SubResource("Curve_1lcff")
+materialName = "gravel"
+maxNormalLoadCoeficient = 8.0
+coeficientOfFriction = 0.9
+slippingStream = ExtResource("9_2iy2e")
+slipAudioMinimumVelocity = 8.0
+slipAudioMinimumPitch = 0.9
+slipAudioMaximumVelocity = 100.0
+slipAudioMaximumPitch = 1.0
+audioVolumeEase = 0.5
+bumpHeight = 0.02
+bumpNoiseHeight = SubResource("NoiseTexture2D_nj4ux")
+bumpVisualBias = 0.0
+metadata/_custom_type_script = "uid://tl4rxytr884t"
+
+[sub_resource type="Curve" id="Curve_dh1kq"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.930599, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_jvyb2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_qwl02"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_a0ng4"]
+script = ExtResource("7_pt5b7")
+loadEase = 1.0
+clampAfterCombining = true
+gripXCurve = SubResource("Curve_jvyb2")
+useBuildupEase = true
+buildupEase = 0.02
+slipAngleBegin = 12.0
+slipAngleEnd = 16.0
+gripZCurve = SubResource("Curve_qwl02")
+relativeZSpeedBegin = 3.0
+relativeZSpeedEnd = 4.0
+useSlipRatio = false
+feedbackCurve = SubResource("Curve_dh1kq")
+materialName = "tarmac"
+maxNormalLoadCoeficient = 8.0
+coeficientOfFriction = 1.0
+slippingStream = ExtResource("8_j45x7")
+slipAudioMinimumVelocity = 8.0
+slipAudioMinimumPitch = 0.8
+slipAudioMaximumVelocity = 100.0
+slipAudioMaximumPitch = 1.1
+audioVolumeEase = 0.5
+bumpHeight = 0.0
+bumpVisualBias = 0.0
+metadata/_custom_type_script = "uid://tl4rxytr884t"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lja7o"]
+height = 0.523
+radius = 0.643
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k1307"]
+albedo_color = Color(5.53504e-07, 0.241883, 0.335758, 1)
+roughness = 0.42
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dgnlx"]
+albedo_color = Color(0.242667, 0.476244, 0.480529, 1)
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_d0tk8"]
+resource_local_to_scene = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_1iyjx"]
+size = Vector2(0.125, 0.125)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gxbvy"]
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(0, 0.74902, 1, 1)
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="Curve" id="Curve_a0ng4"]
+_data = [Vector2(0, 0.874), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_lja7o"]
+_data = [Vector2(0, 0), 0.0, 1.828, 0, 0, Vector2(0.075, 0.632), 0.0, 0.0, 0, 0, Vector2(0.98, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.895), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="MonsterTruck" type="RigidBody3D" groups=["vehicules"]]
+mass = 1000.0
+physics_material_override = SubResource("PhysicsMaterial_mgw6p")
+can_sleep = false
+script = ExtResource("1_x0rmv")
+createWheelMinimumColliders = true
+substeps = 4
+
+[node name="debugVectors" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_g5pof")
+cast_shadow = 0
+mesh = SubResource("ImmediateMesh_ixsks")
+script = ExtResource("2_p54xk")
+
+[node name="Label3DDebug" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+sorting_offset = 1.0
+pixel_size = 0.002
+billboard = 1
+double_sided = false
+no_depth_test = true
+fixed_size = true
+script = ExtResource("3_nmnxy")
+
+[node name="chassi" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+layers = 129
+mesh = ExtResource("4_hdlfg")
+surface_material_override/0 = SubResource("StandardMaterial3D_25hjg")
+surface_material_override/1 = SubResource("StandardMaterial3D_4eicv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_wup1r")
+
+[node name="FR" parent="." instance=ExtResource("5_q6661")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35, -0.109, -1.194)
+radius = 0.643
+width = 0.523
+momentOfInertia = 40.0
+getDimensionsFromMeshAABB = true
+tireResponses = Array[ExtResource("6_3vg2q")]([SubResource("Resource_ai8qv"), SubResource("Resource_sku65")])
+defaultTireResponse = SubResource("Resource_a0ng4")
+steer = true
+maxSteerAngle = 0.785
+rpsDeltaThreshold = 0.1
+useShapecastForPhysics = true
+
+[node name="RayCast3D" parent="FR" index="0"]
+target_position = Vector3(0, -1.533, 0)
+
+[node name="shapecastPivot" parent="FR" index="1"]
+transform = Transform3D(0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="ShapeCast3D" parent="FR/shapecastPivot" index="0"]
+enabled = true
+shape = SubResource("CylinderShape3D_lja7o")
+
+[node name="wheelSteerPivot" parent="FR" index="2"]
+transform = Transform3D(0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0, 0, 1, 0, -0.889, 0)
+restExtension = -0.396
+maxExtension = -0.889
+
+[node name="wheelMesh" parent="FR/wheelSteerPivot/wheelRollPivot" index="0"]
+mesh = ExtResource("10_75wet")
+surface_material_override/0 = SubResource("StandardMaterial3D_k1307")
+surface_material_override/1 = SubResource("StandardMaterial3D_dgnlx")
+
+[node name="contactTransform" parent="FR" index="3"]
+mesh = SubResource("ImmediateMesh_d0tk8")
+
+[node name="FL" parent="." instance=ExtResource("5_q6661")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35, -0.109, -1.194)
+radius = 0.643
+width = 0.523
+momentOfInertia = 40.0
+getDimensionsFromMeshAABB = true
+tireResponses = Array[ExtResource("6_3vg2q")]([SubResource("Resource_ai8qv"), SubResource("Resource_sku65")])
+defaultTireResponse = SubResource("Resource_a0ng4")
+steer = true
+maxSteerAngle = 0.785
+rpsDeltaThreshold = 0.1
+useShapecastForPhysics = true
+
+[node name="RayCast3D" parent="FL" index="0"]
+target_position = Vector3(0, -1.533, 0)
+
+[node name="shapecastPivot" parent="FL" index="1"]
+transform = Transform3D(0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="ShapeCast3D" parent="FL/shapecastPivot" index="0"]
+enabled = true
+shape = SubResource("CylinderShape3D_lja7o")
+
+[node name="wheelSteerPivot" parent="FL" index="2"]
+transform = Transform3D(0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0, 0, 1, 0, -0.889, 0)
+restExtension = -0.396
+maxExtension = -0.889
+
+[node name="wheelMesh" parent="FL/wheelSteerPivot/wheelRollPivot" index="0"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+mesh = ExtResource("10_75wet")
+surface_material_override/0 = SubResource("StandardMaterial3D_k1307")
+surface_material_override/1 = SubResource("StandardMaterial3D_dgnlx")
+
+[node name="contactTransform" parent="FL" index="3"]
+mesh = SubResource("ImmediateMesh_d0tk8")
+
+[node name="RR" parent="." instance=ExtResource("5_q6661")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35, -0.109, 1.356)
+radius = 0.643
+width = 0.523
+momentOfInertia = 40.0
+getDimensionsFromMeshAABB = true
+tireResponses = Array[ExtResource("6_3vg2q")]([SubResource("Resource_ai8qv"), SubResource("Resource_sku65")])
+defaultTireResponse = SubResource("Resource_a0ng4")
+maxSteerAngle = -0.785
+rpsDeltaThreshold = 0.1
+useShapecastForPhysics = true
+
+[node name="RayCast3D" parent="RR" index="0"]
+target_position = Vector3(0, -1.533, 0)
+
+[node name="shapecastPivot" parent="RR" index="1"]
+transform = Transform3D(0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="ShapeCast3D" parent="RR/shapecastPivot" index="0"]
+enabled = true
+shape = SubResource("CylinderShape3D_lja7o")
+
+[node name="wheelSteerPivot" parent="RR" index="2"]
+transform = Transform3D(0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 0, 0, 1, 0, -0.889, 0)
+restExtension = -0.396
+maxExtension = -0.889
+
+[node name="wheelMesh" parent="RR/wheelSteerPivot/wheelRollPivot" index="0"]
+mesh = ExtResource("10_75wet")
+surface_material_override/0 = SubResource("StandardMaterial3D_k1307")
+surface_material_override/1 = SubResource("StandardMaterial3D_dgnlx")
+
+[node name="contactTransform" parent="RR" index="3"]
+mesh = SubResource("ImmediateMesh_d0tk8")
+
+[node name="RL" parent="." instance=ExtResource("5_q6661")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35, -0.109, 1.356)
+radius = 0.643
+width = 0.523
+momentOfInertia = 40.0
+getDimensionsFromMeshAABB = true
+tireResponses = Array[ExtResource("6_3vg2q")]([SubResource("Resource_ai8qv"), SubResource("Resource_sku65")])
+defaultTireResponse = SubResource("Resource_a0ng4")
+maxSteerAngle = -0.785
+rpsDeltaThreshold = 0.1
+useShapecastForPhysics = true
+
+[node name="RayCast3D" parent="RL" index="0"]
+target_position = Vector3(0, -1.533, 0)
+
+[node name="shapecastPivot" parent="RL" index="1"]
+transform = Transform3D(0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="ShapeCast3D" parent="RL/shapecastPivot" index="0"]
+enabled = true
+shape = SubResource("CylinderShape3D_lja7o")
+
+[node name="wheelSteerPivot" parent="RL" index="2"]
+transform = Transform3D(0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0, 0, 1, 0, -0.889, 0)
+restExtension = -0.396
+maxExtension = -0.889
+
+[node name="wheelMesh" parent="RL/wheelSteerPivot/wheelRollPivot" index="0"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+mesh = ExtResource("10_75wet")
+surface_material_override/0 = SubResource("StandardMaterial3D_k1307")
+surface_material_override/1 = SubResource("StandardMaterial3D_dgnlx")
+
+[node name="contactTransform" parent="RL" index="3"]
+mesh = SubResource("ImmediateMesh_d0tk8")
+
+[node name="kInputHandler" parent="." node_paths=PackedStringArray("vehicle", "transmission", "rearWheels") instance=ExtResource("11_yuh4p")]
+vehicle = NodePath("..")
+transmission = NodePath("../drivetrain")
+steeringMethod = 1
+maxSlipAngleDeg = 8.0
+rearWheels = [NodePath("../RR"), NodePath("../RL")]
+
+[node name="centerOfMass" parent="." instance=ExtResource("12_h5y2x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.341, 0)
+mesh = SubResource("QuadMesh_1iyjx")
+surface_material_override/0 = SubResource("StandardMaterial3D_gxbvy")
+
+[node name="handbreak" parent="." node_paths=PackedStringArray("wheels") instance=ExtResource("13_srm8v")]
+wheels = [NodePath("../RR"), NodePath("../RL")]
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.358, 0.672, -0.234)
+script = ExtResource("14_ucej6")
+target = NodePath("..")
+
+[node name="enginePitcherSFX" parent="." node_paths=PackedStringArray("engine") instance=ExtResource("14_ai8qv")]
+stream = ExtResource("15_ucej6")
+autoplay = true
+streamRevsPerMinute = 4000.0
+engine = NodePath("../engine")
+volumeThrotleCurve = SubResource("Curve_a0ng4")
+
+[node name="engine" parent="." instance=ExtResource("16_nj4ux")]
+torqueCurve = SubResource("Curve_lja7o")
+peakTorque = 250.0
+internalFrictionTorque = 20.0
+breakTorque = 50.0
+limmiterCounterTorqueRatio = 4.0
+momentOfInertia = 0.2
+
+[node name="drivetrain" parent="." node_paths=PackedStringArray("poweredWheels", "engine") instance=ExtResource("17_1lcff")]
+poweredWheels = [NodePath("../FL"), NodePath("../FR"), NodePath("../RR"), NodePath("../RL")]
+engine = NodePath("../engine")
+gearRatios = Array[float]([-0.1, 0.0, 0.12, 0.3, 0.5, 0.7, 1.0, 1.2])
+finalRatio = 0.28
+
+[node name="breakFront" parent="." node_paths=PackedStringArray("wheels") instance=ExtResource("18_82fu8")]
+wheels = [NodePath("../FL"), NodePath("../FR")]
+strength = 1200.0
+
+[node name="breakRear" parent="." node_paths=PackedStringArray("wheels") instance=ExtResource("18_82fu8")]
+wheels = [NodePath("../RR"), NodePath("../RL")]
+strength = 250.0
+
+[node name="k-swayBarFront" parent="." node_paths=PackedStringArray("wheels") instance=ExtResource("19_7vs20")]
+wheels = [NodePath("../FL"), NodePath("../FR")]
+
+[node name="k-swayBarRear" parent="." node_paths=PackedStringArray("wheels") instance=ExtResource("19_7vs20")]
+wheels = [NodePath("../RR"), NodePath("../RL")]
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19, 0.162)
+size = Vector3(2.2, 1, 3.3)
+
+[node name="input" type="Node" parent="." node_paths=PackedStringArray("rearWheels")]
+script = ExtResource("20_sku65")
+rearWheels = [NodePath("../RR"), NodePath("../RL")]
+
+[node name="lsdRear" parent="." node_paths=PackedStringArray("wheels") instance=ExtResource("21_ai8qv")]
+wheels = [NodePath("../RL"), NodePath("../RR")]
+
+[node name="lsdFront" parent="." node_paths=PackedStringArray("wheels") instance=ExtResource("21_ai8qv")]
+wheels = [NodePath("../FR"), NodePath("../FL")]
+
+[node name="KVCentralLSDifferential" type="Node" parent="." node_paths=PackedStringArray("lsds")]
+script = ExtResource("22_ucej6")
+lsds = [NodePath("../lsdRear"), NodePath("../lsdFront")]
+limit = 4.0
+
+[node name="shiftAssist" parent="." node_paths=PackedStringArray("engine", "drivetrain") instance=ExtResource("23_nj4ux")]
+engine = NodePath("../engine")
+drivetrain = NodePath("../drivetrain")
+
+[editable path="FR"]
+[editable path="FL"]
+[editable path="RR"]
+[editable path="RL"]

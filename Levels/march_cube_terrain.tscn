@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cktq6vthdfy6b"]
+
+[ext_resource type="Script" uid="uid://bpe5tr32fpyi3" path="res://Levels/march_cube_terrain.gd" id="1_kile6"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kile6"]
+noise_type = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kile6"]
+transparency = 1
+depth_draw_mode = 1
+shading_mode = 0
+albedo_color = Color(0.2, 0.8, 1, 0.3)
+
+[node name="MarchCubeTerrain" type="Node3D"]
+script = ExtResource("1_kile6")
+NOISE = SubResource("FastNoiseLite_kile6")
+FLAT_SHADED = true
+TERRAIN_TERRACE = 2
+preview_material = SubResource("StandardMaterial3D_kile6")
