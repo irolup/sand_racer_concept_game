@@ -10,7 +10,7 @@ A terrain-editing racing game built with Godot 4.4. Create custom tracks by scul
 
 This game is functional but incomplete:
 - [x] Level editor with terrain sculpting (marching cubes)
-- [x]Track saving and loading
+- [x] Track saving and loading
 - [x] Vehicle physics and racing mechanics
 - [x] Checkpoint and finish line system
 - [ ] Missing some textures and models
