@@ -41,7 +41,7 @@ func _ready():
 				_start_mode_if_pending()
 			)
 	else:
-		printerr("❌ march_cude_node is not assigned in GameManager!")
+		printerr("march_cude_node is not assigned in GameManager!")
 
 
 func _process(_delta):
@@ -125,14 +125,14 @@ func _on_mode_changed(previous_mode, current_mode):
 			march_cude_node.clear_preview()
 	
 	if current_mode == player.mode_manager.PlayerMode.DRIVING:
-		print("➡ Entering DRIVING mode (test race)")
-		# Disable the player (already in DRIVING mode from mode_manager)
+		print("Entering DRIVING mode (test race)")
 		player.set_player_enabled(false)
+		
+		get_tree().paused = false
 		
 		var truck_instance = spawn_monster_truck()
 		
 		if truck_instance:
-			# Switch to truck camera cleanly
 			player.smooth_camera.current = false
 			if truck_instance.has_node("Camera3D"):
 				truck_instance.get_node("Camera3D").current = true
@@ -141,10 +141,11 @@ func _on_mode_changed(previous_mode, current_mode):
 
 			checkpoints_passed.clear()
 			race_start_time = Time.get_ticks_msec() / 1000.0
+			
 			show_race_menu()
 
 	elif current_mode == player.mode_manager.PlayerMode.EDITOR:
-		print("⬅ Returning to EDITOR mode")
+		print("Returning to EDITOR mode")
 		# Clean up monster truck from both references
 		if monster_truck:
 			if is_instance_valid(monster_truck):
@@ -162,7 +163,7 @@ func _on_mode_changed(previous_mode, current_mode):
 		player.smooth_camera.current = true
 
 func restart_race():
-	print("🔄 Restarting race...")
+	print("Restarting race...")
 
 	# Clear passed checkpoints
 	checkpoints_passed.clear()
@@ -179,7 +180,7 @@ func restart_race():
 	# Reset the race timer
 	race_start_time = Time.get_ticks_msec() / 1000.0
 
-	print("✅ Race restarted. Timer and checkpoints cleared.")
+	print("Race restarted. Timer and checkpoints cleared.")
 
 func end_game():
 	print("🏁 You Win!")
@@ -198,7 +199,7 @@ func end_game():
 		if duration <= current_best or current_best == 0.0:
 			PlayerSave.set_best_lap_data(GameState.track_name, duration, checkpoint_timestamps)
 	else:
-		print("⚠️ RaceTimer not found!")
+		print("RaceTimer not found!")
 		var end_time = Time.get_ticks_msec() / 1000.0
 		var duration = end_time - race_start_time
 
@@ -330,7 +331,7 @@ func load_map(file_path: String) -> void:
 					if obj_data.has("checkpoint_id"):
 						area.checkpoint_id = obj_data["checkpoint_id"]
 					else:
-						print("⚠️ Warning: checkpoint_id missing in saved data. Skipping registration.")
+						print("Warning: checkpoint_id missing in saved data. Skipping registration.")
 						continue  # Skip this checkpoint if no ID
 
 					register_checkpoint(area)
@@ -462,7 +463,7 @@ func _deferred_update_chunks():
 
 func save_current_track():
 	if GameState.track_name == "":
-		print("❌ No track name in GameState.")
+		print("No track name in GameState.")
 		return
 	var data = collect_game_data()
 	TrackSaver.save_track(GameState.track_name, data)
@@ -482,16 +483,16 @@ func load_current_track(start_mode: int = GameState.GameMode.EDITOR):
 		vehicle_manager.set_truck(null)
 	
 	if GameState.track_name == "":
-		print("❌ No track name in GameState.")
+		print("No track name in GameState.")
 		return
 	var data = TrackSaver.load_track(GameState.track_name)
 	if data.is_empty():
-		print("❌ Track data is empty or failed to load.")
+		print("Track data is empty or failed to load.")
 		return
 	apply_game_data(data)
-	print("✅ Loaded track:", GameState.track_name)
+	print("Loaded track:", GameState.track_name)
 	if march_cude_node and march_cude_node.ready:
-		print("🟢 Terrain ready, running _start_mode_if_pending")
+		print("Terrain ready, running _start_mode_if_pending")
 		_start_mode_if_pending()
 
 func show_race_menu():
@@ -499,14 +500,14 @@ func show_race_menu():
 		race_menu = RaceMenuScene.instantiate()
 		add_child(race_menu)
 
-		# Connect signals once here
 		race_menu.start_race.connect(_on_race_start)
 		race_menu.retry_race.connect(_on_race_retry)
-		race_menu.visible = pending_start_mode != GameState.GameMode.EDITOR
 		race_menu.quit_game.connect(_on_race_quit)
 	else:
 		race_menu.reset()
 
+	race_menu.visible = true
+	
 	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
@@ -514,7 +515,6 @@ func show_race_menu():
 	race_menu.set_best_time(best)
 
 func _on_race_start():
-	# Clean up previous HUD if it exists
 	if race_hud:
 		race_hud.queue_free()
 		race_hud = null

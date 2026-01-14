@@ -114,13 +114,17 @@ func handle_camera_rotation() -> void:
 	
 func switch_camera(to_vehicle: bool) -> void:
 	if to_vehicle:
-		smooth_camera.current = false
-		camera_monster_truck.current = true
+		if smooth_camera:
+			smooth_camera.current = false
+		if camera_monster_truck:
+			camera_monster_truck.current = true
 		#vehicle_camera.current = true
 	else:
 		#vehicle_camera.current = false
-		camera_monster_truck.current = false
-		smooth_camera.current = true
+		if camera_monster_truck:
+			camera_monster_truck.current = false
+		if smooth_camera:
+			smooth_camera.current = true
 
 func set_vehicle(vehicle: Node):
 	monster_truck = vehicle

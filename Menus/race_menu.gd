@@ -48,9 +48,9 @@ func _on_return_pressed():
 	GameState.current_mode = GameState.GameMode.EDITOR
 	GameState.came_from_editor = false
 
-	var mode_manager = get_node_or_null("/root/MainLevel/ModeManager")
-	if mode_manager:
-		mode_manager.set_mode(mode_manager.PlayerMode.EDITOR)
+	var player = get_node_or_null("/root/MainLevel/Player")
+	if player and player.mode_manager:
+		player.mode_manager.set_mode(player.mode_manager.PlayerMode.EDITOR)
 
 	visible = false
 	get_tree().paused = false
@@ -65,3 +65,6 @@ func reset():
 	race_button.visible = true
 	retry_button.visible = false
 	visible = true
+	return_button.visible = GameState.came_from_editor
+	if GameState.came_from_editor and not return_button.pressed.is_connected(_on_return_pressed):
+		return_button.pressed.connect(_on_return_pressed)
