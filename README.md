@@ -31,18 +31,16 @@ The core gameplay loop works: you can create tracks, save them, load them, and r
 ### Editor Mode
 - **WASD**: Move camera
 - **Mouse**: Look around
-- **Left Click**: Dig terrain
-- **Right Click**: Place terrain
-- **Middle Click**: Equalize terrain
+- **Right Click**: Edit terrain
 - **1**: Normal mode
-- **2**: Editor mode
+- **2**: Editor mode (for the terrain)
 - **3**: Object placer mode
-- **5**: Selector mode
 - **B**: Cycle brush type
 - **E/Q**: Cycle brush/object selection
 - **M/N**: Increase/decrease brush radius
 - **R**: Rotate object
-- **P**: Place object
+- **P**: Place object the Object placer mode
+- **H**: Select an object while in 
 - **Delete**: Delete selected object
 - **F7**: Save map
 - **F8**: Load map
